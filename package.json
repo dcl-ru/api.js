@@ -1,0 +1,40 @@
+{
+  "name": "@dcl.ru/api",
+  "version": "3.0.0",
+  "description": "Typesafe JavaScript dcl API client",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dcl-ru/api.js.git"
+  },
+  "keywords": [
+    "dcl",
+    "javascript",
+    "api",
+    "client"
+  ],
+  "author": "Algoritm Razvitiya LLC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dcl-ru/api.js/issues"
+  },
+  "homepage": "https://docs.dcl.ru",
+  "devDependencies": {
+    "@types/node": "latest",
+    "typescript": "latest"
+  },
+  "dependencies": {
+    "zod": "latest"
+  }
+}

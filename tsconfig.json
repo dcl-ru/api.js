@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ESNext",
+    "strict": true,
+    "moduleResolution": "Bundler",
+    "declaration": true,
+    "sourceMap": true,
+    "declarationMap": true,
+    "outDir": "./dist"
+  }
+}
