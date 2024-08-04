@@ -1,2 +1,2 @@
 # api.js
-JavaScript-клиент для DCL API v3
+JavaScript-клиент для dcl API v3
