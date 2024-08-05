@@ -1,9 +1,8 @@
 {
   "name": "@dcl.ru/api",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Typesafe JavaScript dcl API client",
   "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "type": "module",
   "files": [
@@ -11,7 +10,7 @@
   ],
   "scripts": {
     "dev": "tsc --watch",
-    "build": "tsup",
+    "build": "tsc",
     "test": "exit 0"
   },
   "repository": {
@@ -32,7 +31,6 @@
   "homepage": "https://docs.dcl.ru",
   "devDependencies": {
     "@types/node": "latest",
-    "tsup": "^8.2.4",
     "typescript": "latest"
   },
   "dependencies": {

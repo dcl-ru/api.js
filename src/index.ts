@@ -10,7 +10,7 @@ import {
     GroupSchema,
     type TagDto,
     TagSchema
-} from './dtos/fronts';
+} from './dtos/fronts.js';
 import {
     ProductCardDto,
     ProductCardOnHomepageDto,
@@ -20,10 +20,10 @@ import {
     ProductSchema,
     ScheduleSlotDto,
     ScheduleSlotSchema,
-} from './dtos/products';
-import {APIErrorSchema} from './dtos/errors';
-import APIError from './error';
-import UnixTimestamp from './unixtimestamp';
+} from './dtos/products.js';
+import {APIErrorSchema} from './dtos/errors.js';
+import APIError from './error.js';
+import UnixTimestamp from './unixtimestamp.js';
 
 const VERSION: string = '3';
 

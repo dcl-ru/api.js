@@ -1,12 +1,17 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
+    "module": "NodeNext",
     "target": "ESNext",
     "strict": true,
-    "moduleResolution": "Bundler",
+    "moduleResolution": "NodeNext",
     "declaration": true,
     "sourceMap": true,
     "declarationMap": true,
-    "outDir": "./dist"
-  }
+    "outDir": "./dist",
+    "esModuleInterop": true
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

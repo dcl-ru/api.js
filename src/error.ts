@@ -1,4 +1,4 @@
-import {APIErrorType} from './dtos/errors'
+import {APIErrorType} from './dtos/errors.js'
 
 export default class APIError extends Error {
     public readonly code: number;

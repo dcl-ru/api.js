@@ -1,5 +1,5 @@
 import {z} from 'zod';
-import {BadgeSchema, CategorySchema, GroupSchema, TagSchema} from './fronts';
+import {BadgeSchema, CategorySchema, GroupSchema, TagSchema} from './fronts.js';
 
 export enum SaleSchemas {
     Free = 1,
