@@ -1,360 +1,77 @@
 import { z } from 'zod';
-export declare enum SaleSchemas {
-    Free = 1,
-    Sale = 2,
-    Registration = 3,
-    ExternalSale = 4,
-    ExternalRegistration = 5,
-    Onsite = 6
+
+declare const CategorySchema: z.ZodObject<{
+    id: z.ZodNumber;
+    slug: z.ZodString;
+    nameSingular: z.ZodString;
+    namePlural: z.ZodString;
+}, "strip", z.ZodTypeAny, {
+    id: number;
+    slug: string;
+    nameSingular: string;
+    namePlural: string;
+}, {
+    id: number;
+    slug: string;
+    nameSingular: string;
+    namePlural: string;
+}>;
+type CategoryDto = z.infer<typeof CategorySchema>;
+declare enum CardTypes {
+    Regular = 1,
+    Main = 2,
+    Featured = 3
 }
-export declare const SaleSchemasEnumSchema: z.ZodNativeEnum<typeof SaleSchemas>;
-export declare enum ImageTypes {
-    Original = 1,
-    Micro = 2,
-    Thumbnail = 3,
-    Card = 4,
-    Regular = 5,
-    Background = 6
-}
-export declare const ImageTypesEnumSchema: z.ZodNativeEnum<typeof ImageTypes>;
-export declare enum AccessTypes {
-    Free = 1,
-    Paid = 2,
-    Registration = 3
-}
-export declare const AccessTypesEnumSchema: z.ZodNativeEnum<typeof AccessTypes>;
-export declare const PeriodSchema: z.ZodObject<{
-    from: z.ZodNullable<z.ZodDate>;
-    until: z.ZodNullable<z.ZodDate>;
-}, "strip", z.ZodTypeAny, {
-    from: Date | null;
-    until: Date | null;
-}, {
-    from: Date | null;
-    until: Date | null;
-}>;
-export type PeriodDto = z.infer<typeof PeriodSchema>;
-export declare const ImageSchema: z.ZodObject<{
-    id: z.ZodNumber;
-    type: z.ZodNativeEnum<typeof ImageTypes>;
-    url: z.ZodString;
-    altText: z.ZodString;
-    copyright: z.ZodNullable<z.ZodString>;
-    copyrightUrl: z.ZodNullable<z.ZodString>;
-}, "strip", z.ZodTypeAny, {
-    type: ImageTypes;
-    id: number;
-    url: string;
-    altText: string;
-    copyright: string | null;
-    copyrightUrl: string | null;
-}, {
-    type: ImageTypes;
-    id: number;
-    url: string;
-    altText: string;
-    copyright: string | null;
-    copyrightUrl: string | null;
-}>;
-export type ImageDto = z.infer<typeof ImageSchema>;
-export declare const GeoSchema: z.ZodObject<{
-    lat: z.ZodNumber;
-    lon: z.ZodNumber;
-}, "strip", z.ZodTypeAny, {
-    lat: number;
-    lon: number;
-}, {
-    lat: number;
-    lon: number;
-}>;
-export type GeoDto = z.infer<typeof GeoSchema>;
-export declare const WorkingHourBreakSchema: z.ZodObject<{
-    id: z.ZodNumber;
-    period: z.ZodObject<{
-        from: z.ZodNullable<z.ZodDate>;
-        until: z.ZodNullable<z.ZodDate>;
-    }, "strip", z.ZodTypeAny, {
-        from: Date | null;
-        until: Date | null;
-    }, {
-        from: Date | null;
-        until: Date | null;
-    }>;
-}, "strip", z.ZodTypeAny, {
-    id: number;
-    period: {
-        from: Date | null;
-        until: Date | null;
-    };
-}, {
-    id: number;
-    period: {
-        from: Date | null;
-        until: Date | null;
-    };
-}>;
-export type WorkingHourBreakDto = z.infer<typeof WorkingHourBreakSchema>;
-export declare const WorkingHourSchema: z.ZodObject<{
-    id: z.ZodNumber;
-    dayOfWeek: z.ZodNumber;
-    period: z.ZodObject<{
-        from: z.ZodNullable<z.ZodDate>;
-        until: z.ZodNullable<z.ZodDate>;
-    }, "strip", z.ZodTypeAny, {
-        from: Date | null;
-        until: Date | null;
-    }, {
-        from: Date | null;
-        until: Date | null;
-    }>;
-    breaks: z.ZodObject<{
-        id: z.ZodNumber;
-        period: z.ZodObject<{
-            from: z.ZodNullable<z.ZodDate>;
-            until: z.ZodNullable<z.ZodDate>;
-        }, "strip", z.ZodTypeAny, {
-            from: Date | null;
-            until: Date | null;
-        }, {
-            from: Date | null;
-            until: Date | null;
-        }>;
-    }, "strip", z.ZodTypeAny, {
-        id: number;
-        period: {
-            from: Date | null;
-            until: Date | null;
-        };
-    }, {
-        id: number;
-        period: {
-            from: Date | null;
-            until: Date | null;
-        };
-    }>;
-}, "strip", z.ZodTypeAny, {
-    id: number;
-    period: {
-        from: Date | null;
-        until: Date | null;
-    };
-    dayOfWeek: number;
-    breaks: {
-        id: number;
-        period: {
-            from: Date | null;
-            until: Date | null;
-        };
-    };
-}, {
-    id: number;
-    period: {
-        from: Date | null;
-        until: Date | null;
-    };
-    dayOfWeek: number;
-    breaks: {
-        id: number;
-        period: {
-            from: Date | null;
-            until: Date | null;
-        };
-    };
-}>;
-export type WorkingHourDto = z.infer<typeof WorkingHourSchema>;
-export declare const OpenPeriodExclusionSchema: z.ZodObject<{
-    id: z.ZodNumber;
-    period: z.ZodObject<{
-        from: z.ZodNullable<z.ZodDate>;
-        until: z.ZodNullable<z.ZodDate>;
-    }, "strip", z.ZodTypeAny, {
-        from: Date | null;
-        until: Date | null;
-    }, {
-        from: Date | null;
-        until: Date | null;
-    }>;
-}, "strip", z.ZodTypeAny, {
-    id: number;
-    period: {
-        from: Date | null;
-        until: Date | null;
-    };
-}, {
-    id: number;
-    period: {
-        from: Date | null;
-        until: Date | null;
-    };
-}>;
-export type OpenPeriodExclusionDto = z.infer<typeof OpenPeriodExclusionSchema>;
-export declare const OpenPeriodSchema: z.ZodObject<{
-    id: z.ZodNumber;
-    period: z.ZodObject<{
-        from: z.ZodNullable<z.ZodDate>;
-        until: z.ZodNullable<z.ZodDate>;
-    }, "strip", z.ZodTypeAny, {
-        from: Date | null;
-        until: Date | null;
-    }, {
-        from: Date | null;
-        until: Date | null;
-    }>;
-    exclusions: z.ZodArray<z.ZodObject<{
-        id: z.ZodNumber;
-        period: z.ZodObject<{
-            from: z.ZodNullable<z.ZodDate>;
-            until: z.ZodNullable<z.ZodDate>;
-        }, "strip", z.ZodTypeAny, {
-            from: Date | null;
-            until: Date | null;
-        }, {
-            from: Date | null;
-            until: Date | null;
-        }>;
-    }, "strip", z.ZodTypeAny, {
-        id: number;
-        period: {
-            from: Date | null;
-            until: Date | null;
-        };
-    }, {
-        id: number;
-        period: {
-            from: Date | null;
-            until: Date | null;
-        };
-    }>, "many">;
-    workingHours: z.ZodArray<z.ZodObject<{
-        id: z.ZodNumber;
-        dayOfWeek: z.ZodNumber;
-        period: z.ZodObject<{
-            from: z.ZodNullable<z.ZodDate>;
-            until: z.ZodNullable<z.ZodDate>;
-        }, "strip", z.ZodTypeAny, {
-            from: Date | null;
-            until: Date | null;
-        }, {
-            from: Date | null;
-            until: Date | null;
-        }>;
-        breaks: z.ZodObject<{
-            id: z.ZodNumber;
-            period: z.ZodObject<{
-                from: z.ZodNullable<z.ZodDate>;
-                until: z.ZodNullable<z.ZodDate>;
-            }, "strip", z.ZodTypeAny, {
-                from: Date | null;
-                until: Date | null;
-            }, {
-                from: Date | null;
-                until: Date | null;
-            }>;
-        }, "strip", z.ZodTypeAny, {
-            id: number;
-            period: {
-                from: Date | null;
-                until: Date | null;
-            };
-        }, {
-            id: number;
-            period: {
-                from: Date | null;
-                until: Date | null;
-            };
-        }>;
-    }, "strip", z.ZodTypeAny, {
-        id: number;
-        period: {
-            from: Date | null;
-            until: Date | null;
-        };
-        dayOfWeek: number;
-        breaks: {
-            id: number;
-            period: {
-                from: Date | null;
-                until: Date | null;
-            };
-        };
-    }, {
-        id: number;
-        period: {
-            from: Date | null;
-            until: Date | null;
-        };
-        dayOfWeek: number;
-        breaks: {
-            id: number;
-            period: {
-                from: Date | null;
-                until: Date | null;
-            };
-        };
-    }>, "many">;
-}, "strip", z.ZodTypeAny, {
-    id: number;
-    period: {
-        from: Date | null;
-        until: Date | null;
-    };
-    exclusions: {
-        id: number;
-        period: {
-            from: Date | null;
-            until: Date | null;
-        };
-    }[];
-    workingHours: {
-        id: number;
-        period: {
-            from: Date | null;
-            until: Date | null;
-        };
-        dayOfWeek: number;
-        breaks: {
-            id: number;
-            period: {
-                from: Date | null;
-                until: Date | null;
-            };
-        };
-    }[];
-}, {
-    id: number;
-    period: {
-        from: Date | null;
-        until: Date | null;
-    };
-    exclusions: {
-        id: number;
-        period: {
-            from: Date | null;
-            until: Date | null;
-        };
-    }[];
-    workingHours: {
-        id: number;
-        period: {
-            from: Date | null;
-            until: Date | null;
-        };
-        dayOfWeek: number;
-        breaks: {
-            id: number;
-            period: {
-                from: Date | null;
-                until: Date | null;
-            };
-        };
-    }[];
-}>;
-export type OpenPeriodDto = z.infer<typeof OpenPeriodSchema>;
-export declare const InventoryItemSchema: z.ZodObject<{
+declare const GroupSchema: z.ZodObject<{
     id: z.ZodNumber;
     slug: z.ZodString;
     name: z.ZodString;
-    category: z.ZodObject<{
+    cardType: z.ZodNativeEnum<typeof CardTypes>;
+}, "strip", z.ZodTypeAny, {
+    id: number;
+    slug: string;
+    name: string;
+    cardType: CardTypes;
+}, {
+    id: number;
+    slug: string;
+    name: string;
+    cardType: CardTypes;
+}>;
+type GroupDto = z.infer<typeof GroupSchema>;
+declare const TagSchema: z.ZodObject<{
+    id: z.ZodNumber;
+    slug: z.ZodString;
+    name: z.ZodString;
+}, "strip", z.ZodTypeAny, {
+    id: number;
+    slug: string;
+    name: string;
+}, {
+    id: number;
+    slug: string;
+    name: string;
+}>;
+type TagDto = z.infer<typeof TagSchema>;
+declare const BadgeSchema: z.ZodObject<{
+    id: z.ZodNumber;
+    slug: z.ZodString;
+    name: z.ZodString;
+    color: z.ZodString;
+}, "strip", z.ZodTypeAny, {
+    id: number;
+    slug: string;
+    name: string;
+    color: string;
+}, {
+    id: number;
+    slug: string;
+    name: string;
+    color: string;
+}>;
+type BadgeDto = z.infer<typeof BadgeSchema>;
+declare const CategoriesGroupsTagsBadgesSchema: z.ZodObject<{
+    categories: z.ZodArray<z.ZodObject<{
         id: z.ZodNumber;
         slug: z.ZodString;
         nameSingular: z.ZodString;
@@ -369,352 +86,125 @@ export declare const InventoryItemSchema: z.ZodObject<{
         slug: string;
         nameSingular: string;
         namePlural: string;
-    }>;
-    description: z.ZodString;
-    accessType: z.ZodNativeEnum<typeof AccessTypes>;
-    ageRating: z.ZodNumber;
-    address: z.ZodString;
-    geo: z.ZodObject<{
-        lat: z.ZodNumber;
-        lon: z.ZodNumber;
-    }, "strip", z.ZodTypeAny, {
-        lat: number;
-        lon: number;
-    }, {
-        lat: number;
-        lon: number;
-    }>;
-    mapUrl: z.ZodString;
-    outside: z.ZodBoolean;
-    animalsAllowed: z.ZodBoolean;
-    animalsRecommended: z.ZodBoolean;
-    kidsAllowed: z.ZodBoolean;
-    kidsRecommended: z.ZodBoolean;
-    featured: z.ZodBoolean;
-    images: z.ZodArray<z.ZodObject<{
-        id: z.ZodNumber;
-        type: z.ZodNativeEnum<typeof ImageTypes>;
-        url: z.ZodString;
-        altText: z.ZodString;
-        copyright: z.ZodNullable<z.ZodString>;
-        copyrightUrl: z.ZodNullable<z.ZodString>;
-    }, "strip", z.ZodTypeAny, {
-        type: ImageTypes;
-        id: number;
-        url: string;
-        altText: string;
-        copyright: string | null;
-        copyrightUrl: string | null;
-    }, {
-        type: ImageTypes;
-        id: number;
-        url: string;
-        altText: string;
-        copyright: string | null;
-        copyrightUrl: string | null;
     }>, "many">;
-    openPeriods: z.ZodArray<z.ZodObject<{
+    groups: z.ZodArray<z.ZodObject<{
         id: z.ZodNumber;
-        period: z.ZodObject<{
-            from: z.ZodNullable<z.ZodDate>;
-            until: z.ZodNullable<z.ZodDate>;
-        }, "strip", z.ZodTypeAny, {
-            from: Date | null;
-            until: Date | null;
-        }, {
-            from: Date | null;
-            until: Date | null;
-        }>;
-        exclusions: z.ZodArray<z.ZodObject<{
-            id: z.ZodNumber;
-            period: z.ZodObject<{
-                from: z.ZodNullable<z.ZodDate>;
-                until: z.ZodNullable<z.ZodDate>;
-            }, "strip", z.ZodTypeAny, {
-                from: Date | null;
-                until: Date | null;
-            }, {
-                from: Date | null;
-                until: Date | null;
-            }>;
-        }, "strip", z.ZodTypeAny, {
-            id: number;
-            period: {
-                from: Date | null;
-                until: Date | null;
-            };
-        }, {
-            id: number;
-            period: {
-                from: Date | null;
-                until: Date | null;
-            };
-        }>, "many">;
-        workingHours: z.ZodArray<z.ZodObject<{
-            id: z.ZodNumber;
-            dayOfWeek: z.ZodNumber;
-            period: z.ZodObject<{
-                from: z.ZodNullable<z.ZodDate>;
-                until: z.ZodNullable<z.ZodDate>;
-            }, "strip", z.ZodTypeAny, {
-                from: Date | null;
-                until: Date | null;
-            }, {
-                from: Date | null;
-                until: Date | null;
-            }>;
-            breaks: z.ZodObject<{
-                id: z.ZodNumber;
-                period: z.ZodObject<{
-                    from: z.ZodNullable<z.ZodDate>;
-                    until: z.ZodNullable<z.ZodDate>;
-                }, "strip", z.ZodTypeAny, {
-                    from: Date | null;
-                    until: Date | null;
-                }, {
-                    from: Date | null;
-                    until: Date | null;
-                }>;
-            }, "strip", z.ZodTypeAny, {
-                id: number;
-                period: {
-                    from: Date | null;
-                    until: Date | null;
-                };
-            }, {
-                id: number;
-                period: {
-                    from: Date | null;
-                    until: Date | null;
-                };
-            }>;
-        }, "strip", z.ZodTypeAny, {
-            id: number;
-            period: {
-                from: Date | null;
-                until: Date | null;
-            };
-            dayOfWeek: number;
-            breaks: {
-                id: number;
-                period: {
-                    from: Date | null;
-                    until: Date | null;
-                };
-            };
-        }, {
-            id: number;
-            period: {
-                from: Date | null;
-                until: Date | null;
-            };
-            dayOfWeek: number;
-            breaks: {
-                id: number;
-                period: {
-                    from: Date | null;
-                    until: Date | null;
-                };
-            };
-        }>, "many">;
+        slug: z.ZodString;
+        name: z.ZodString;
+        cardType: z.ZodNativeEnum<typeof CardTypes>;
     }, "strip", z.ZodTypeAny, {
         id: number;
-        period: {
-            from: Date | null;
-            until: Date | null;
-        };
-        exclusions: {
-            id: number;
-            period: {
-                from: Date | null;
-                until: Date | null;
-            };
-        }[];
-        workingHours: {
-            id: number;
-            period: {
-                from: Date | null;
-                until: Date | null;
-            };
-            dayOfWeek: number;
-            breaks: {
-                id: number;
-                period: {
-                    from: Date | null;
-                    until: Date | null;
-                };
-            };
-        }[];
+        slug: string;
+        name: string;
+        cardType: CardTypes;
     }, {
         id: number;
-        period: {
-            from: Date | null;
-            until: Date | null;
-        };
-        exclusions: {
-            id: number;
-            period: {
-                from: Date | null;
-                until: Date | null;
-            };
-        }[];
-        workingHours: {
-            id: number;
-            period: {
-                from: Date | null;
-                until: Date | null;
-            };
-            dayOfWeek: number;
-            breaks: {
-                id: number;
-                period: {
-                    from: Date | null;
-                    until: Date | null;
-                };
-            };
-        }[];
+        slug: string;
+        name: string;
+        cardType: CardTypes;
+    }>, "many">;
+    tags: z.ZodArray<z.ZodObject<{
+        id: z.ZodNumber;
+        slug: z.ZodString;
+        name: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        id: number;
+        slug: string;
+        name: string;
+    }, {
+        id: number;
+        slug: string;
+        name: string;
+    }>, "many">;
+    badges: z.ZodArray<z.ZodObject<{
+        id: z.ZodNumber;
+        slug: z.ZodString;
+        name: z.ZodString;
+        color: z.ZodString;
+    }, "strip", z.ZodTypeAny, {
+        id: number;
+        slug: string;
+        name: string;
+        color: string;
+    }, {
+        id: number;
+        slug: string;
+        name: string;
+        color: string;
     }>, "many">;
 }, "strip", z.ZodTypeAny, {
-    name: string;
-    id: number;
-    address: string;
-    description: string;
-    slug: string;
-    category: {
+    categories: {
         id: number;
         slug: string;
         nameSingular: string;
         namePlural: string;
-    };
-    accessType: AccessTypes;
-    ageRating: number;
-    geo: {
-        lat: number;
-        lon: number;
-    };
-    mapUrl: string;
-    outside: boolean;
-    animalsAllowed: boolean;
-    animalsRecommended: boolean;
-    kidsAllowed: boolean;
-    kidsRecommended: boolean;
-    featured: boolean;
-    images: {
-        type: ImageTypes;
-        id: number;
-        url: string;
-        altText: string;
-        copyright: string | null;
-        copyrightUrl: string | null;
     }[];
-    openPeriods: {
+    groups: {
         id: number;
-        period: {
-            from: Date | null;
-            until: Date | null;
-        };
-        exclusions: {
-            id: number;
-            period: {
-                from: Date | null;
-                until: Date | null;
-            };
-        }[];
-        workingHours: {
-            id: number;
-            period: {
-                from: Date | null;
-                until: Date | null;
-            };
-            dayOfWeek: number;
-            breaks: {
-                id: number;
-                period: {
-                    from: Date | null;
-                    until: Date | null;
-                };
-            };
-        }[];
+        slug: string;
+        name: string;
+        cardType: CardTypes;
+    }[];
+    tags: {
+        id: number;
+        slug: string;
+        name: string;
+    }[];
+    badges: {
+        id: number;
+        slug: string;
+        name: string;
+        color: string;
     }[];
 }, {
-    name: string;
-    id: number;
-    address: string;
-    description: string;
-    slug: string;
-    category: {
+    categories: {
         id: number;
         slug: string;
         nameSingular: string;
         namePlural: string;
-    };
-    accessType: AccessTypes;
-    ageRating: number;
-    geo: {
-        lat: number;
-        lon: number;
-    };
-    mapUrl: string;
-    outside: boolean;
-    animalsAllowed: boolean;
-    animalsRecommended: boolean;
-    kidsAllowed: boolean;
-    kidsRecommended: boolean;
-    featured: boolean;
-    images: {
-        type: ImageTypes;
-        id: number;
-        url: string;
-        altText: string;
-        copyright: string | null;
-        copyrightUrl: string | null;
     }[];
-    openPeriods: {
+    groups: {
         id: number;
-        period: {
-            from: Date | null;
-            until: Date | null;
-        };
-        exclusions: {
-            id: number;
-            period: {
-                from: Date | null;
-                until: Date | null;
-            };
-        }[];
-        workingHours: {
-            id: number;
-            period: {
-                from: Date | null;
-                until: Date | null;
-            };
-            dayOfWeek: number;
-            breaks: {
-                id: number;
-                period: {
-                    from: Date | null;
-                    until: Date | null;
-                };
-            };
-        }[];
+        slug: string;
+        name: string;
+        cardType: CardTypes;
+    }[];
+    tags: {
+        id: number;
+        slug: string;
+        name: string;
+    }[];
+    badges: {
+        id: number;
+        slug: string;
+        name: string;
+        color: string;
     }[];
 }>;
-export type InventoryItemDto = z.infer<typeof InventoryItemSchema>;
-export declare const InventoryItemFirstSchema: z.ZodObject<{
-    id: z.ZodNumber;
-    slug: z.ZodString;
-    name: z.ZodString;
-}, "strip", z.ZodTypeAny, {
-    name: string;
-    id: number;
-    slug: string;
-}, {
-    name: string;
-    id: number;
-    slug: string;
-}>;
-export type InventoryItemFirstDto = z.infer<typeof InventoryItemFirstSchema>;
-export declare const ProductSchema: z.ZodObject<{
+type CategoriesGroupsTagsBadgesDto = z.infer<typeof CategoriesGroupsTagsBadgesSchema>;
+
+declare enum SaleSchemas {
+    Free = 1,
+    Sale = 2,
+    Registration = 3,
+    ExternalSale = 4,
+    ExternalRegistration = 5,
+    Onsite = 6
+}
+declare enum ImageTypes {
+    Original = 1,
+    Micro = 2,
+    Thumbnail = 3,
+    Card = 4,
+    Regular = 5,
+    Background = 6
+}
+declare enum AccessTypes {
+    Free = 1,
+    Paid = 2,
+    Registration = 3
+}
+declare const ProductSchema: z.ZodObject<{
     id: z.ZodNumber;
     slug: z.ZodString;
     name: z.ZodString;
@@ -740,30 +230,30 @@ export declare const ProductSchema: z.ZodObject<{
         id: z.ZodNumber;
         slug: z.ZodString;
         name: z.ZodString;
-        cardType: z.ZodNativeEnum<typeof import("./fronts").CardTypes>;
+        cardType: z.ZodNativeEnum<typeof CardTypes>;
     }, "strip", z.ZodTypeAny, {
-        name: string;
         id: number;
         slug: string;
-        cardType: import("./fronts").CardTypes;
+        name: string;
+        cardType: CardTypes;
     }, {
-        name: string;
         id: number;
         slug: string;
-        cardType: import("./fronts").CardTypes;
+        name: string;
+        cardType: CardTypes;
     }>, "many">;
     tags: z.ZodArray<z.ZodObject<{
         id: z.ZodNumber;
         slug: z.ZodString;
         name: z.ZodString;
     }, "strip", z.ZodTypeAny, {
-        name: string;
         id: number;
         slug: string;
+        name: string;
     }, {
-        name: string;
         id: number;
         slug: string;
+        name: string;
     }>, "many">;
     badges: z.ZodArray<z.ZodObject<{
         id: z.ZodNumber;
@@ -771,15 +261,15 @@ export declare const ProductSchema: z.ZodObject<{
         name: z.ZodString;
         color: z.ZodString;
     }, "strip", z.ZodTypeAny, {
-        name: string;
         id: number;
-        color: string;
         slug: string;
+        name: string;
+        color: string;
     }, {
-        name: string;
         id: number;
-        color: string;
         slug: string;
+        name: string;
+        color: string;
     }>, "many">;
     ageRating: z.ZodNumber;
     scheduleSlotNext: z.ZodObject<{
@@ -1045,11 +535,19 @@ export declare const ProductSchema: z.ZodObject<{
             }[];
         }>, "many">;
     }, "strip", z.ZodTypeAny, {
-        name: string;
         id: number;
-        address: string;
-        description: string;
         slug: string;
+        name: string;
+        ageRating: number;
+        description: string;
+        images: {
+            type: ImageTypes;
+            id: number;
+            url: string;
+            altText: string;
+            copyright: string | null;
+            copyrightUrl: string | null;
+        }[];
         category: {
             id: number;
             slug: string;
@@ -1057,7 +555,7 @@ export declare const ProductSchema: z.ZodObject<{
             namePlural: string;
         };
         accessType: AccessTypes;
-        ageRating: number;
+        address: string;
         geo: {
             lat: number;
             lon: number;
@@ -1069,14 +567,6 @@ export declare const ProductSchema: z.ZodObject<{
         kidsAllowed: boolean;
         kidsRecommended: boolean;
         featured: boolean;
-        images: {
-            type: ImageTypes;
-            id: number;
-            url: string;
-            altText: string;
-            copyright: string | null;
-            copyrightUrl: string | null;
-        }[];
         openPeriods: {
             id: number;
             period: {
@@ -1107,11 +597,19 @@ export declare const ProductSchema: z.ZodObject<{
             }[];
         }[];
     }, {
-        name: string;
         id: number;
-        address: string;
-        description: string;
         slug: string;
+        name: string;
+        ageRating: number;
+        description: string;
+        images: {
+            type: ImageTypes;
+            id: number;
+            url: string;
+            altText: string;
+            copyright: string | null;
+            copyrightUrl: string | null;
+        }[];
         category: {
             id: number;
             slug: string;
@@ -1119,7 +617,7 @@ export declare const ProductSchema: z.ZodObject<{
             namePlural: string;
         };
         accessType: AccessTypes;
-        ageRating: number;
+        address: string;
         geo: {
             lat: number;
             lon: number;
@@ -1131,14 +629,6 @@ export declare const ProductSchema: z.ZodObject<{
         kidsAllowed: boolean;
         kidsRecommended: boolean;
         featured: boolean;
-        images: {
-            type: ImageTypes;
-            id: number;
-            url: string;
-            altText: string;
-            copyright: string | null;
-            copyrightUrl: string | null;
-        }[];
         openPeriods: {
             id: number;
             period: {
@@ -1170,35 +660,45 @@ export declare const ProductSchema: z.ZodObject<{
         }[];
     }>, "many">;
 }, "strip", z.ZodTypeAny, {
-    groups: {
-        name: string;
-        id: number;
-        slug: string;
-        cardType: import("./fronts").CardTypes;
-    }[];
-    name: string;
     id: number;
-    paused: boolean;
-    description: string | null;
     slug: string;
+    name: string;
     categories: {
         id: number;
         slug: string;
         nameSingular: string;
         namePlural: string;
     }[];
-    tags: {
-        name: string;
+    groups: {
         id: number;
         slug: string;
+        name: string;
+        cardType: CardTypes;
+    }[];
+    tags: {
+        id: number;
+        slug: string;
+        name: string;
     }[];
     badges: {
-        name: string;
         id: number;
-        color: string;
         slug: string;
+        name: string;
+        color: string;
     }[];
+    saleSchema: SaleSchemas;
+    externalUrl: string | null;
     ageRating: number;
+    scheduleSlotNext: {
+        from: Date | null;
+        until: Date | null;
+    };
+    scheduleSlotsMulti: boolean;
+    lead: string | null;
+    description: string | null;
+    pushka: boolean;
+    paused: boolean;
+    soldOut: boolean;
     images: {
         type: ImageTypes;
         id: number;
@@ -1207,22 +707,20 @@ export declare const ProductSchema: z.ZodObject<{
         copyright: string | null;
         copyrightUrl: string | null;
     }[];
-    saleSchema: SaleSchemas;
-    externalUrl: string | null;
-    scheduleSlotNext: {
-        from: Date | null;
-        until: Date | null;
-    };
-    scheduleSlotsMulti: boolean;
-    lead: string | null;
-    pushka: boolean;
-    soldOut: boolean;
     inventoryItems: {
-        name: string;
         id: number;
-        address: string;
-        description: string;
         slug: string;
+        name: string;
+        ageRating: number;
+        description: string;
+        images: {
+            type: ImageTypes;
+            id: number;
+            url: string;
+            altText: string;
+            copyright: string | null;
+            copyrightUrl: string | null;
+        }[];
         category: {
             id: number;
             slug: string;
@@ -1230,7 +728,7 @@ export declare const ProductSchema: z.ZodObject<{
             namePlural: string;
         };
         accessType: AccessTypes;
-        ageRating: number;
+        address: string;
         geo: {
             lat: number;
             lon: number;
@@ -1242,14 +740,6 @@ export declare const ProductSchema: z.ZodObject<{
         kidsAllowed: boolean;
         kidsRecommended: boolean;
         featured: boolean;
-        images: {
-            type: ImageTypes;
-            id: number;
-            url: string;
-            altText: string;
-            copyright: string | null;
-            copyrightUrl: string | null;
-        }[];
         openPeriods: {
             id: number;
             period: {
@@ -1281,35 +771,45 @@ export declare const ProductSchema: z.ZodObject<{
         }[];
     }[];
 }, {
-    groups: {
-        name: string;
-        id: number;
-        slug: string;
-        cardType: import("./fronts").CardTypes;
-    }[];
-    name: string;
     id: number;
-    paused: boolean;
-    description: string | null;
     slug: string;
+    name: string;
     categories: {
         id: number;
         slug: string;
         nameSingular: string;
         namePlural: string;
     }[];
-    tags: {
-        name: string;
+    groups: {
         id: number;
         slug: string;
+        name: string;
+        cardType: CardTypes;
+    }[];
+    tags: {
+        id: number;
+        slug: string;
+        name: string;
     }[];
     badges: {
-        name: string;
         id: number;
-        color: string;
         slug: string;
+        name: string;
+        color: string;
     }[];
+    saleSchema: SaleSchemas;
+    externalUrl: string | null;
     ageRating: number;
+    scheduleSlotNext: {
+        from: Date | null;
+        until: Date | null;
+    };
+    scheduleSlotsMulti: boolean;
+    lead: string | null;
+    description: string | null;
+    pushka: boolean;
+    paused: boolean;
+    soldOut: boolean;
     images: {
         type: ImageTypes;
         id: number;
@@ -1318,22 +818,20 @@ export declare const ProductSchema: z.ZodObject<{
         copyright: string | null;
         copyrightUrl: string | null;
     }[];
-    saleSchema: SaleSchemas;
-    externalUrl: string | null;
-    scheduleSlotNext: {
-        from: Date | null;
-        until: Date | null;
-    };
-    scheduleSlotsMulti: boolean;
-    lead: string | null;
-    pushka: boolean;
-    soldOut: boolean;
     inventoryItems: {
-        name: string;
         id: number;
-        address: string;
-        description: string;
         slug: string;
+        name: string;
+        ageRating: number;
+        description: string;
+        images: {
+            type: ImageTypes;
+            id: number;
+            url: string;
+            altText: string;
+            copyright: string | null;
+            copyrightUrl: string | null;
+        }[];
         category: {
             id: number;
             slug: string;
@@ -1341,7 +839,7 @@ export declare const ProductSchema: z.ZodObject<{
             namePlural: string;
         };
         accessType: AccessTypes;
-        ageRating: number;
+        address: string;
         geo: {
             lat: number;
             lon: number;
@@ -1353,14 +851,6 @@ export declare const ProductSchema: z.ZodObject<{
         kidsAllowed: boolean;
         kidsRecommended: boolean;
         featured: boolean;
-        images: {
-            type: ImageTypes;
-            id: number;
-            url: string;
-            altText: string;
-            copyright: string | null;
-            copyrightUrl: string | null;
-        }[];
         openPeriods: {
             id: number;
             period: {
@@ -1392,8 +882,8 @@ export declare const ProductSchema: z.ZodObject<{
         }[];
     }[];
 }>;
-export type ProductDto = z.infer<typeof ProductSchema>;
-export declare const ProductCardSchema: z.ZodObject<{
+type ProductDto = z.infer<typeof ProductSchema>;
+declare const ProductCardSchema: z.ZodObject<{
     id: z.ZodNumber;
     slug: z.ZodString;
     name: z.ZodString;
@@ -1442,13 +932,13 @@ export declare const ProductCardSchema: z.ZodObject<{
         slug: z.ZodString;
         name: z.ZodString;
     }, "strip", z.ZodTypeAny, {
-        name: string;
         id: number;
         slug: string;
+        name: string;
     }, {
-        name: string;
         id: number;
         slug: string;
+        name: string;
     }>;
     inventoryItemsMulti: z.ZodBoolean;
     priceFrom: z.ZodNullable<z.ZodNumber>;
@@ -1472,30 +962,30 @@ export declare const ProductCardSchema: z.ZodObject<{
         id: z.ZodNumber;
         slug: z.ZodString;
         name: z.ZodString;
-        cardType: z.ZodNativeEnum<typeof import("./fronts").CardTypes>;
+        cardType: z.ZodNativeEnum<typeof CardTypes>;
     }, "strip", z.ZodTypeAny, {
-        name: string;
         id: number;
         slug: string;
-        cardType: import("./fronts").CardTypes;
+        name: string;
+        cardType: CardTypes;
     }, {
-        name: string;
         id: number;
         slug: string;
-        cardType: import("./fronts").CardTypes;
+        name: string;
+        cardType: CardTypes;
     }>, "many">;
     tags: z.ZodArray<z.ZodObject<{
         id: z.ZodNumber;
         slug: z.ZodString;
         name: z.ZodString;
     }, "strip", z.ZodTypeAny, {
-        name: string;
         id: number;
         slug: string;
+        name: string;
     }, {
-        name: string;
         id: number;
         slug: string;
+        name: string;
     }>, "many">;
     badges: z.ZodArray<z.ZodObject<{
         id: z.ZodNumber;
@@ -1503,26 +993,55 @@ export declare const ProductCardSchema: z.ZodObject<{
         name: z.ZodString;
         color: z.ZodString;
     }, "strip", z.ZodTypeAny, {
-        name: string;
         id: number;
-        color: string;
         slug: string;
+        name: string;
+        color: string;
     }, {
-        name: string;
         id: number;
-        color: string;
         slug: string;
+        name: string;
+        color: string;
     }>, "many">;
 }, "strip", z.ZodTypeAny, {
-    groups: {
-        name: string;
+    id: number;
+    slug: string;
+    name: string;
+    categories: {
         id: number;
         slug: string;
-        cardType: import("./fronts").CardTypes;
+        nameSingular: string;
+        namePlural: string;
     }[];
-    name: string;
-    id: number;
+    groups: {
+        id: number;
+        slug: string;
+        name: string;
+        cardType: CardTypes;
+    }[];
+    tags: {
+        id: number;
+        slug: string;
+        name: string;
+    }[];
+    badges: {
+        id: number;
+        slug: string;
+        name: string;
+        color: string;
+    }[];
+    saleSchema: SaleSchemas;
+    ageRating: number;
+    scheduleSlotNext: {
+        from: Date | null;
+        until: Date | null;
+    };
+    scheduleSlotsMulti: boolean;
+    pushka: boolean;
     paused: boolean;
+    soldOut: boolean;
+    featured: boolean;
+    banner: boolean;
     image: {
         type: ImageTypes;
         id: number;
@@ -1531,52 +1050,52 @@ export declare const ProductCardSchema: z.ZodObject<{
         copyright: string | null;
         copyrightUrl: string | null;
     } | null;
-    slug: string;
-    categories: {
-        id: number;
-        slug: string;
-        nameSingular: string;
-        namePlural: string;
-    }[];
-    tags: {
-        name: string;
-        id: number;
-        slug: string;
-    }[];
-    badges: {
-        name: string;
-        id: number;
-        color: string;
-        slug: string;
-    }[];
-    ageRating: number;
-    featured: boolean;
-    saleSchema: SaleSchemas;
-    scheduleSlotNext: {
-        from: Date | null;
-        until: Date | null;
-    };
-    scheduleSlotsMulti: boolean;
-    pushka: boolean;
-    soldOut: boolean;
-    banner: boolean;
     inventoryItemFirst: {
-        name: string;
         id: number;
         slug: string;
+        name: string;
     };
     inventoryItemsMulti: boolean;
     priceFrom: number | null;
 }, {
-    groups: {
-        name: string;
+    id: number;
+    slug: string;
+    name: string;
+    categories: {
         id: number;
         slug: string;
-        cardType: import("./fronts").CardTypes;
+        nameSingular: string;
+        namePlural: string;
     }[];
-    name: string;
-    id: number;
+    groups: {
+        id: number;
+        slug: string;
+        name: string;
+        cardType: CardTypes;
+    }[];
+    tags: {
+        id: number;
+        slug: string;
+        name: string;
+    }[];
+    badges: {
+        id: number;
+        slug: string;
+        name: string;
+        color: string;
+    }[];
+    saleSchema: SaleSchemas;
+    ageRating: number;
+    scheduleSlotNext: {
+        from: Date | null;
+        until: Date | null;
+    };
+    scheduleSlotsMulti: boolean;
+    pushka: boolean;
     paused: boolean;
+    soldOut: boolean;
+    featured: boolean;
+    banner: boolean;
     image: {
         type: ImageTypes;
         id: number;
@@ -1585,45 +1104,16 @@ export declare const ProductCardSchema: z.ZodObject<{
         copyright: string | null;
         copyrightUrl: string | null;
     } | null;
-    slug: string;
-    categories: {
-        id: number;
-        slug: string;
-        nameSingular: string;
-        namePlural: string;
-    }[];
-    tags: {
-        name: string;
-        id: number;
-        slug: string;
-    }[];
-    badges: {
-        name: string;
-        id: number;
-        color: string;
-        slug: string;
-    }[];
-    ageRating: number;
-    featured: boolean;
-    saleSchema: SaleSchemas;
-    scheduleSlotNext: {
-        from: Date | null;
-        until: Date | null;
-    };
-    scheduleSlotsMulti: boolean;
-    pushka: boolean;
-    soldOut: boolean;
-    banner: boolean;
     inventoryItemFirst: {
-        name: string;
         id: number;
         slug: string;
+        name: string;
     };
     inventoryItemsMulti: boolean;
     priceFrom: number | null;
 }>;
-export type ProductCardDto = z.infer<typeof ProductCardSchema>;
-export declare const ProductCardOnHomepageSchema: z.ZodObject<{
+type ProductCardDto = z.infer<typeof ProductCardSchema>;
+declare const ProductCardOnHomepageSchema: z.ZodObject<{
     id: z.ZodNumber;
     slug: z.ZodString;
     name: z.ZodString;
@@ -1705,13 +1195,13 @@ export declare const ProductCardOnHomepageSchema: z.ZodObject<{
         slug: z.ZodString;
         name: z.ZodString;
     }, "strip", z.ZodTypeAny, {
-        name: string;
         id: number;
         slug: string;
+        name: string;
     }, {
-        name: string;
         id: number;
         slug: string;
+        name: string;
     }>;
     inventoryItemsMulti: z.ZodBoolean;
     priceFrom: z.ZodNullable<z.ZodNumber>;
@@ -1735,30 +1225,30 @@ export declare const ProductCardOnHomepageSchema: z.ZodObject<{
         id: z.ZodNumber;
         slug: z.ZodString;
         name: z.ZodString;
-        cardType: z.ZodNativeEnum<typeof import("./fronts").CardTypes>;
+        cardType: z.ZodNativeEnum<typeof CardTypes>;
     }, "strip", z.ZodTypeAny, {
-        name: string;
         id: number;
         slug: string;
-        cardType: import("./fronts").CardTypes;
+        name: string;
+        cardType: CardTypes;
     }, {
-        name: string;
         id: number;
         slug: string;
-        cardType: import("./fronts").CardTypes;
+        name: string;
+        cardType: CardTypes;
     }>, "many">;
     tags: z.ZodArray<z.ZodObject<{
         id: z.ZodNumber;
         slug: z.ZodString;
         name: z.ZodString;
     }, "strip", z.ZodTypeAny, {
-        name: string;
         id: number;
         slug: string;
+        name: string;
     }, {
-        name: string;
         id: number;
         slug: string;
+        name: string;
     }>, "many">;
     badges: z.ZodArray<z.ZodObject<{
         id: z.ZodNumber;
@@ -1766,70 +1256,55 @@ export declare const ProductCardOnHomepageSchema: z.ZodObject<{
         name: z.ZodString;
         color: z.ZodString;
     }, "strip", z.ZodTypeAny, {
-        name: string;
         id: number;
-        color: string;
         slug: string;
+        name: string;
+        color: string;
     }, {
-        name: string;
         id: number;
-        color: string;
         slug: string;
+        name: string;
+        color: string;
     }>, "many">;
 }, "strip", z.ZodTypeAny, {
-    groups: {
-        name: string;
-        id: number;
-        slug: string;
-        cardType: import("./fronts").CardTypes;
-    }[];
-    name: string;
     id: number;
-    paused: boolean;
-    image: {
-        type: ImageTypes;
-        id: number;
-        url: string;
-        altText: string;
-        copyright: string | null;
-        copyrightUrl: string | null;
-    } | null;
     slug: string;
+    name: string;
     categories: {
         id: number;
         slug: string;
         nameSingular: string;
         namePlural: string;
     }[];
-    tags: {
-        name: string;
+    groups: {
         id: number;
         slug: string;
+        name: string;
+        cardType: CardTypes;
+    }[];
+    tags: {
+        id: number;
+        slug: string;
+        name: string;
     }[];
     badges: {
-        name: string;
         id: number;
-        color: string;
         slug: string;
+        name: string;
+        color: string;
     }[];
-    ageRating: number;
-    featured: boolean;
     saleSchema: SaleSchemas;
+    ageRating: number;
     scheduleSlotNext: {
         from: Date | null;
         until: Date | null;
     };
     scheduleSlotsMulti: boolean;
     pushka: boolean;
+    paused: boolean;
     soldOut: boolean;
+    featured: boolean;
     banner: boolean;
-    inventoryItemFirst: {
-        name: string;
-        id: number;
-        slug: string;
-    };
-    inventoryItemsMulti: boolean;
-    priceFrom: number | null;
     scheduleSlotToday: {
         from: Date | null;
         until: Date | null;
@@ -1845,60 +1320,60 @@ export declare const ProductCardOnHomepageSchema: z.ZodObject<{
         until: Date | null;
     } | null;
     scheduleSlotsWeekendMulti: boolean | null;
+    image: {
+        type: ImageTypes;
+        id: number;
+        url: string;
+        altText: string;
+        copyright: string | null;
+        copyrightUrl: string | null;
+    } | null;
+    inventoryItemFirst: {
+        id: number;
+        slug: string;
+        name: string;
+    };
+    inventoryItemsMulti: boolean;
+    priceFrom: number | null;
 }, {
-    groups: {
-        name: string;
-        id: number;
-        slug: string;
-        cardType: import("./fronts").CardTypes;
-    }[];
-    name: string;
     id: number;
-    paused: boolean;
-    image: {
-        type: ImageTypes;
-        id: number;
-        url: string;
-        altText: string;
-        copyright: string | null;
-        copyrightUrl: string | null;
-    } | null;
     slug: string;
+    name: string;
     categories: {
         id: number;
         slug: string;
         nameSingular: string;
         namePlural: string;
     }[];
-    tags: {
-        name: string;
+    groups: {
         id: number;
         slug: string;
+        name: string;
+        cardType: CardTypes;
+    }[];
+    tags: {
+        id: number;
+        slug: string;
+        name: string;
     }[];
     badges: {
-        name: string;
         id: number;
-        color: string;
         slug: string;
+        name: string;
+        color: string;
     }[];
-    ageRating: number;
-    featured: boolean;
     saleSchema: SaleSchemas;
+    ageRating: number;
     scheduleSlotNext: {
         from: Date | null;
         until: Date | null;
     };
     scheduleSlotsMulti: boolean;
     pushka: boolean;
+    paused: boolean;
     soldOut: boolean;
+    featured: boolean;
     banner: boolean;
-    inventoryItemFirst: {
-        name: string;
-        id: number;
-        slug: string;
-    };
-    inventoryItemsMulti: boolean;
-    priceFrom: number | null;
     scheduleSlotToday: {
         from: Date | null;
         until: Date | null;
@@ -1914,9 +1389,24 @@ export declare const ProductCardOnHomepageSchema: z.ZodObject<{
         until: Date | null;
     } | null;
     scheduleSlotsWeekendMulti: boolean | null;
+    image: {
+        type: ImageTypes;
+        id: number;
+        url: string;
+        altText: string;
+        copyright: string | null;
+        copyrightUrl: string | null;
+    } | null;
+    inventoryItemFirst: {
+        id: number;
+        slug: string;
+        name: string;
+    };
+    inventoryItemsMulti: boolean;
+    priceFrom: number | null;
 }>;
-export type ProductCardOnHomepageDto = z.infer<typeof ProductCardOnHomepageSchema>;
-export declare const ScheduleSlotSchema: z.ZodObject<{
+type ProductCardOnHomepageDto = z.infer<typeof ProductCardOnHomepageSchema>;
+declare const ScheduleSlotSchema: z.ZodObject<{
     id: z.ZodNumber;
     slot: z.ZodObject<{
         from: z.ZodNullable<z.ZodDate>;
@@ -1934,24 +1424,60 @@ export declare const ScheduleSlotSchema: z.ZodObject<{
     soldOut: z.ZodNullable<z.ZodNumber>;
 }, "strip", z.ZodTypeAny, {
     id: number;
+    soldOut: number | null;
     slot: {
         from: Date | null;
         until: Date | null;
     };
-    soldOut: number | null;
     capacity: number | null;
     capacityBooked: number | null;
     capacityAvailable: number | null;
 }, {
     id: number;
+    soldOut: number | null;
     slot: {
         from: Date | null;
         until: Date | null;
     };
-    soldOut: number | null;
     capacity: number | null;
     capacityBooked: number | null;
     capacityAvailable: number | null;
 }>;
-export type ScheduleSlotDto = z.infer<typeof ScheduleSlotSchema>;
-//# sourceMappingURL=products.d.ts.map
+type ScheduleSlotDto = z.infer<typeof ScheduleSlotSchema>;
+
+declare class UnixTimestamp {
+    unixTimestamp: number;
+    dateTime: Date;
+    constructor(dt: number | string | Date);
+    toUnixTimestamp(): number;
+    toIsoDateTimeString(): string;
+    toIsoDateString(): string;
+}
+
+declare class DclApi {
+    private readonly base_url;
+    private readonly front;
+    private readonly key;
+    private readonly secret;
+    constructor(base_url: string, front: string, key: string, secret: string);
+    private signRequest;
+    private prepareRequest;
+    private get;
+    private create;
+    getCategories(): Promise<CategoryDto[]>;
+    getGroups(): Promise<GroupDto[]>;
+    getTags(): Promise<TagDto[]>;
+    getBadges(): Promise<BadgeDto[]>;
+    getCategoriesGroupsTagsBadges(): Promise<CategoriesGroupsTagsBadgesDto>;
+    getProducts(): Promise<ProductDto[]>;
+    getProduct(slug: string): Promise<ProductDto>;
+    getProductScheduleSlots(slug: string): Promise<ScheduleSlotDto[]>;
+    getProductCardsOnHomepage(): Promise<ProductCardOnHomepageDto[]>;
+    getProductCardsInCategory(slug: string): Promise<ProductCardDto[]>;
+    getProductCardsInGroup(slug: string): Promise<ProductCardDto[]>;
+    getProductCardsWithTag(slug: string): Promise<ProductCardDto[]>;
+    getProductCardsWithBadge(slug: string): Promise<ProductCardDto[]>;
+    getProductCardsOnDate(timestamp: UnixTimestamp): Promise<ProductCardDto[]>;
+}
+
+export { DclApi as default };

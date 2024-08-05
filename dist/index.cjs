@@ -1,13 +1,37 @@
+"use strict";
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
 // src/index.ts
-import { createHash, createHmac } from "crypto";
+var src_exports = {};
+__export(src_exports, {
+  default: () => DclApi
+});
+module.exports = __toCommonJS(src_exports);
+var import_crypto = require("crypto");
 
 // src/dtos/fronts.ts
-import { z } from "zod";
-var CategorySchema = z.object({
-  id: z.coerce.number(),
-  slug: z.string(),
-  nameSingular: z.string(),
-  namePlural: z.string()
+var import_zod = require("zod");
+var CategorySchema = import_zod.z.object({
+  id: import_zod.z.coerce.number(),
+  slug: import_zod.z.string(),
+  nameSingular: import_zod.z.string(),
+  namePlural: import_zod.z.string()
 });
 var CardTypes = /* @__PURE__ */ ((CardTypes2) => {
   CardTypes2[CardTypes2["Regular"] = 1] = "Regular";
@@ -15,25 +39,25 @@ var CardTypes = /* @__PURE__ */ ((CardTypes2) => {
   CardTypes2[CardTypes2["Featured"] = 3] = "Featured";
   return CardTypes2;
 })(CardTypes || {});
-var CardTypesEnumSchema = z.nativeEnum(CardTypes);
-var GroupSchema = z.object({
-  id: z.coerce.number(),
-  slug: z.string(),
-  name: z.string(),
+var CardTypesEnumSchema = import_zod.z.nativeEnum(CardTypes);
+var GroupSchema = import_zod.z.object({
+  id: import_zod.z.coerce.number(),
+  slug: import_zod.z.string(),
+  name: import_zod.z.string(),
   cardType: CardTypesEnumSchema
 });
-var TagSchema = z.object({
-  id: z.coerce.number(),
-  slug: z.string(),
-  name: z.string()
+var TagSchema = import_zod.z.object({
+  id: import_zod.z.coerce.number(),
+  slug: import_zod.z.string(),
+  name: import_zod.z.string()
 });
-var BadgeSchema = z.object({
-  id: z.coerce.number(),
-  slug: z.string(),
-  name: z.string(),
-  color: z.string()
+var BadgeSchema = import_zod.z.object({
+  id: import_zod.z.coerce.number(),
+  slug: import_zod.z.string(),
+  name: import_zod.z.string(),
+  color: import_zod.z.string()
 });
-var CategoriesGroupsTagsBadgesSchema = z.object({
+var CategoriesGroupsTagsBadgesSchema = import_zod.z.object({
   categories: CategorySchema.array(),
   groups: GroupSchema.array(),
   tags: TagSchema.array(),
@@ -41,7 +65,7 @@ var CategoriesGroupsTagsBadgesSchema = z.object({
 });
 
 // src/dtos/products.ts
-import { z as z2 } from "zod";
+var import_zod2 = require("zod");
 var SaleSchemas = /* @__PURE__ */ ((SaleSchemas2) => {
   SaleSchemas2[SaleSchemas2["Free"] = 1] = "Free";
   SaleSchemas2[SaleSchemas2["Sale"] = 2] = "Sale";
@@ -51,7 +75,7 @@ var SaleSchemas = /* @__PURE__ */ ((SaleSchemas2) => {
   SaleSchemas2[SaleSchemas2["Onsite"] = 6] = "Onsite";
   return SaleSchemas2;
 })(SaleSchemas || {});
-var SaleSchemasEnumSchema = z2.nativeEnum(SaleSchemas);
+var SaleSchemasEnumSchema = import_zod2.z.nativeEnum(SaleSchemas);
 var ImageTypes = /* @__PURE__ */ ((ImageTypes2) => {
   ImageTypes2[ImageTypes2["Original"] = 1] = "Original";
   ImageTypes2[ImageTypes2["Micro"] = 2] = "Micro";
@@ -61,160 +85,160 @@ var ImageTypes = /* @__PURE__ */ ((ImageTypes2) => {
   ImageTypes2[ImageTypes2["Background"] = 6] = "Background";
   return ImageTypes2;
 })(ImageTypes || {});
-var ImageTypesEnumSchema = z2.nativeEnum(ImageTypes);
+var ImageTypesEnumSchema = import_zod2.z.nativeEnum(ImageTypes);
 var AccessTypes = /* @__PURE__ */ ((AccessTypes2) => {
   AccessTypes2[AccessTypes2["Free"] = 1] = "Free";
   AccessTypes2[AccessTypes2["Paid"] = 2] = "Paid";
   AccessTypes2[AccessTypes2["Registration"] = 3] = "Registration";
   return AccessTypes2;
 })(AccessTypes || {});
-var AccessTypesEnumSchema = z2.nativeEnum(AccessTypes);
-var PeriodSchema = z2.object({
-  from: z2.coerce.date().nullable(),
-  until: z2.coerce.date().nullable()
+var AccessTypesEnumSchema = import_zod2.z.nativeEnum(AccessTypes);
+var PeriodSchema = import_zod2.z.object({
+  from: import_zod2.z.coerce.date().nullable(),
+  until: import_zod2.z.coerce.date().nullable()
 });
-var ImageSchema = z2.object({
-  id: z2.coerce.number(),
+var ImageSchema = import_zod2.z.object({
+  id: import_zod2.z.coerce.number(),
   type: ImageTypesEnumSchema,
-  url: z2.string(),
-  altText: z2.string(),
-  copyright: z2.string().nullable(),
-  copyrightUrl: z2.string().nullable()
+  url: import_zod2.z.string(),
+  altText: import_zod2.z.string(),
+  copyright: import_zod2.z.string().nullable(),
+  copyrightUrl: import_zod2.z.string().nullable()
 });
-var GeoSchema = z2.object({
-  lat: z2.coerce.number(),
-  lon: z2.coerce.number()
+var GeoSchema = import_zod2.z.object({
+  lat: import_zod2.z.coerce.number(),
+  lon: import_zod2.z.coerce.number()
 });
-var WorkingHourBreakSchema = z2.object({
-  id: z2.coerce.number(),
+var WorkingHourBreakSchema = import_zod2.z.object({
+  id: import_zod2.z.coerce.number(),
   period: PeriodSchema
 });
-var WorkingHourSchema = z2.object({
-  id: z2.coerce.number(),
-  dayOfWeek: z2.coerce.number(),
+var WorkingHourSchema = import_zod2.z.object({
+  id: import_zod2.z.coerce.number(),
+  dayOfWeek: import_zod2.z.coerce.number(),
   period: PeriodSchema,
   breaks: WorkingHourBreakSchema
 });
-var OpenPeriodExclusionSchema = z2.object({
-  id: z2.coerce.number(),
+var OpenPeriodExclusionSchema = import_zod2.z.object({
+  id: import_zod2.z.coerce.number(),
   period: PeriodSchema
 });
-var OpenPeriodSchema = z2.object({
-  id: z2.coerce.number(),
+var OpenPeriodSchema = import_zod2.z.object({
+  id: import_zod2.z.coerce.number(),
   period: PeriodSchema,
   exclusions: OpenPeriodExclusionSchema.array(),
   workingHours: WorkingHourSchema.array()
 });
-var InventoryItemSchema = z2.object({
-  id: z2.coerce.number(),
-  slug: z2.string(),
-  name: z2.string(),
+var InventoryItemSchema = import_zod2.z.object({
+  id: import_zod2.z.coerce.number(),
+  slug: import_zod2.z.string(),
+  name: import_zod2.z.string(),
   category: CategorySchema,
-  description: z2.string(),
+  description: import_zod2.z.string(),
   accessType: AccessTypesEnumSchema,
-  ageRating: z2.coerce.number(),
-  address: z2.string(),
+  ageRating: import_zod2.z.coerce.number(),
+  address: import_zod2.z.string(),
   geo: GeoSchema,
-  mapUrl: z2.string(),
-  outside: z2.coerce.boolean(),
-  animalsAllowed: z2.coerce.boolean(),
-  animalsRecommended: z2.coerce.boolean(),
-  kidsAllowed: z2.coerce.boolean(),
-  kidsRecommended: z2.coerce.boolean(),
-  featured: z2.coerce.boolean(),
+  mapUrl: import_zod2.z.string(),
+  outside: import_zod2.z.coerce.boolean(),
+  animalsAllowed: import_zod2.z.coerce.boolean(),
+  animalsRecommended: import_zod2.z.coerce.boolean(),
+  kidsAllowed: import_zod2.z.coerce.boolean(),
+  kidsRecommended: import_zod2.z.coerce.boolean(),
+  featured: import_zod2.z.coerce.boolean(),
   images: ImageSchema.array(),
   openPeriods: OpenPeriodSchema.array()
 });
-var InventoryItemFirstSchema = z2.object({
-  id: z2.coerce.number(),
-  slug: z2.string(),
-  name: z2.string()
+var InventoryItemFirstSchema = import_zod2.z.object({
+  id: import_zod2.z.coerce.number(),
+  slug: import_zod2.z.string(),
+  name: import_zod2.z.string()
 });
-var ProductSchema = z2.object({
-  id: z2.coerce.number(),
-  slug: z2.string(),
-  name: z2.string(),
+var ProductSchema = import_zod2.z.object({
+  id: import_zod2.z.coerce.number(),
+  slug: import_zod2.z.string(),
+  name: import_zod2.z.string(),
   saleSchema: SaleSchemasEnumSchema,
-  externalUrl: z2.string().nullable(),
+  externalUrl: import_zod2.z.string().nullable(),
   categories: CategorySchema.array(),
   groups: GroupSchema.array(),
   tags: TagSchema.array(),
   badges: BadgeSchema.array(),
-  ageRating: z2.coerce.number(),
+  ageRating: import_zod2.z.coerce.number(),
   scheduleSlotNext: PeriodSchema,
-  scheduleSlotsMulti: z2.coerce.boolean(),
-  lead: z2.string().nullable(),
-  description: z2.string().nullable(),
-  pushka: z2.coerce.boolean(),
-  paused: z2.coerce.boolean(),
-  soldOut: z2.coerce.boolean(),
+  scheduleSlotsMulti: import_zod2.z.coerce.boolean(),
+  lead: import_zod2.z.string().nullable(),
+  description: import_zod2.z.string().nullable(),
+  pushka: import_zod2.z.coerce.boolean(),
+  paused: import_zod2.z.coerce.boolean(),
+  soldOut: import_zod2.z.coerce.boolean(),
   images: ImageSchema.array(),
   inventoryItems: InventoryItemSchema.array()
 });
-var ProductCardSchema = z2.object({
-  id: z2.coerce.number(),
-  slug: z2.string(),
-  name: z2.string(),
-  ageRating: z2.coerce.number(),
+var ProductCardSchema = import_zod2.z.object({
+  id: import_zod2.z.coerce.number(),
+  slug: import_zod2.z.string(),
+  name: import_zod2.z.string(),
+  ageRating: import_zod2.z.coerce.number(),
   saleSchema: SaleSchemasEnumSchema,
-  featured: z2.coerce.boolean(),
-  banner: z2.coerce.boolean(),
-  pushka: z2.coerce.boolean(),
-  paused: z2.coerce.boolean(),
-  soldOut: z2.coerce.boolean(),
+  featured: import_zod2.z.coerce.boolean(),
+  banner: import_zod2.z.coerce.boolean(),
+  pushka: import_zod2.z.coerce.boolean(),
+  paused: import_zod2.z.coerce.boolean(),
+  soldOut: import_zod2.z.coerce.boolean(),
   scheduleSlotNext: PeriodSchema,
-  scheduleSlotsMulti: z2.coerce.boolean(),
+  scheduleSlotsMulti: import_zod2.z.coerce.boolean(),
   image: ImageSchema.nullable(),
   inventoryItemFirst: InventoryItemFirstSchema,
-  inventoryItemsMulti: z2.coerce.boolean(),
-  priceFrom: z2.coerce.number().nullable(),
+  inventoryItemsMulti: import_zod2.z.coerce.boolean(),
+  priceFrom: import_zod2.z.coerce.number().nullable(),
   categories: CategorySchema.array(),
   groups: GroupSchema.array(),
   tags: TagSchema.array(),
   badges: BadgeSchema.array()
 });
-var ProductCardOnHomepageSchema = z2.object({
-  id: z2.coerce.number(),
-  slug: z2.string(),
-  name: z2.string(),
-  ageRating: z2.coerce.number(),
+var ProductCardOnHomepageSchema = import_zod2.z.object({
+  id: import_zod2.z.coerce.number(),
+  slug: import_zod2.z.string(),
+  name: import_zod2.z.string(),
+  ageRating: import_zod2.z.coerce.number(),
   saleSchema: SaleSchemasEnumSchema,
-  featured: z2.coerce.boolean(),
-  banner: z2.coerce.boolean(),
-  pushka: z2.coerce.boolean(),
-  paused: z2.coerce.boolean(),
-  soldOut: z2.coerce.boolean(),
+  featured: import_zod2.z.coerce.boolean(),
+  banner: import_zod2.z.coerce.boolean(),
+  pushka: import_zod2.z.coerce.boolean(),
+  paused: import_zod2.z.coerce.boolean(),
+  soldOut: import_zod2.z.coerce.boolean(),
   scheduleSlotNext: PeriodSchema,
-  scheduleSlotsMulti: z2.coerce.boolean(),
+  scheduleSlotsMulti: import_zod2.z.coerce.boolean(),
   scheduleSlotToday: PeriodSchema.nullable(),
-  scheduleSlotsTodayMulti: z2.coerce.boolean().nullable(),
+  scheduleSlotsTodayMulti: import_zod2.z.coerce.boolean().nullable(),
   scheduleSlotTomorrow: PeriodSchema.nullable(),
-  scheduleSlotsTomorrowMulti: z2.coerce.boolean().nullable(),
+  scheduleSlotsTomorrowMulti: import_zod2.z.coerce.boolean().nullable(),
   scheduleSlotWeekend: PeriodSchema.nullable(),
-  scheduleSlotsWeekendMulti: z2.coerce.boolean().nullable(),
+  scheduleSlotsWeekendMulti: import_zod2.z.coerce.boolean().nullable(),
   image: ImageSchema.nullable(),
   inventoryItemFirst: InventoryItemFirstSchema,
-  inventoryItemsMulti: z2.coerce.boolean(),
-  priceFrom: z2.coerce.number().nullable(),
+  inventoryItemsMulti: import_zod2.z.coerce.boolean(),
+  priceFrom: import_zod2.z.coerce.number().nullable(),
   categories: CategorySchema.array(),
   groups: GroupSchema.array(),
   tags: TagSchema.array(),
   badges: BadgeSchema.array()
 });
-var ScheduleSlotSchema = z2.object({
-  id: z2.coerce.number(),
+var ScheduleSlotSchema = import_zod2.z.object({
+  id: import_zod2.z.coerce.number(),
   slot: PeriodSchema,
-  capacity: z2.coerce.number().nullable(),
-  capacityBooked: z2.coerce.number().nullable(),
-  capacityAvailable: z2.coerce.number().nullable(),
-  soldOut: z2.coerce.number().nullable()
+  capacity: import_zod2.z.coerce.number().nullable(),
+  capacityBooked: import_zod2.z.coerce.number().nullable(),
+  capacityAvailable: import_zod2.z.coerce.number().nullable(),
+  soldOut: import_zod2.z.coerce.number().nullable()
 });
 
 // src/dtos/errors.ts
-import { z as z3 } from "zod";
-var APIErrorSchema = z3.object({
-  code: z3.coerce.number(),
-  error: z3.string()
+var import_zod3 = require("zod");
+var APIErrorSchema = import_zod3.z.object({
+  code: import_zod3.z.coerce.number(),
+  error: import_zod3.z.string()
 });
 
 // src/error.ts
@@ -249,14 +273,14 @@ var DclApi = class {
 `, "").trim();
     const signedHeaders = [...request.headers.keys()].sort().reduce((acc, obj) => acc += `${obj.toLowerCase().trim()};`, "").slice(0, -1).trim();
     const payload = request.body ? JSON.stringify(request.body) : "";
-    const hashedPayload = createHash("sha256").update(new TextEncoder().encode(payload)).digest("hex");
+    const hashedPayload = (0, import_crypto.createHash)("sha256").update(new TextEncoder().encode(payload)).digest("hex");
     const canonicalRequest = `${request.method.trim()}
 ${canonicalUri}
 ${canonicalQueryString}
 ${canonicalHeaders}
 ${signedHeaders}
 ${hashedPayload}`;
-    return createHmac("sha256", this.secret).update(new TextEncoder().encode(canonicalRequest)).digest("hex");
+    return (0, import_crypto.createHmac)("sha256", this.secret).update(new TextEncoder().encode(canonicalRequest)).digest("hex");
   }
   prepareRequest(method, url, body) {
     const headersInit = {
@@ -360,7 +384,4 @@ ${hashedPayload}`;
     return ProductCardSchema.array().parseAsync(res);
   }
 };
-export {
-  DclApi as default
-};
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=index.cjs.map

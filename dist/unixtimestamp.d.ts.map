@@ -1,1 +1,0 @@
-{"version":3,"file":"unixtimestamp.d.ts","sourceRoot":"","sources":["../src/unixtimestamp.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,OAAO,OAAO,aAAa;IAC9B,aAAa,EAAE,MAAM,CAAK;IAC1B,QAAQ,EAAE,IAAI,CAAc;gBAEhB,EAAE,EAAE,MAAM,GAAG,MAAM,GAAG,IAAI;IAwBtC,eAAe,IAAI,MAAM;IAIzB,mBAAmB,IAAI,MAAM;IAI7B,eAAe,IAAI,MAAM;CAG5B"}
