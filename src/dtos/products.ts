@@ -35,6 +35,13 @@ export const PeriodSchema = z.object({
 
 export type PeriodDto = z.infer<typeof PeriodSchema>;
 
+export const PeriodTimeSchema = z.object({
+    from: z.string().nullable(),
+    until: z.string().nullable(),
+});
+
+export type PeriodTimeDto = z.infer<typeof PeriodTimeSchema>;
+
 export const ImageSchema = z.object({
     id: z.coerce.number(),
     type: ImageTypesEnumSchema,
@@ -55,7 +62,7 @@ export type GeoDto = z.infer<typeof GeoSchema>;
 
 export const WorkingHourBreakSchema = z.object({
     id: z.coerce.number(),
-    period: PeriodSchema,
+    period: PeriodTimeSchema,
 });
 
 export type WorkingHourBreakDto = z.infer<typeof WorkingHourBreakSchema>;
@@ -63,7 +70,7 @@ export type WorkingHourBreakDto = z.infer<typeof WorkingHourBreakSchema>;
 export const WorkingHourSchema = z.object({
     id: z.coerce.number(),
     dayOfWeek: z.coerce.number(),
-    period: PeriodSchema,
+    period: PeriodTimeSchema,
     breaks: WorkingHourBreakSchema,
 });
 
