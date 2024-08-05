@@ -71,7 +71,7 @@ export const WorkingHourSchema = z.object({
     id: z.coerce.number(),
     dayOfWeek: z.coerce.number(),
     period: PeriodTimeSchema,
-    breaks: WorkingHourBreakSchema,
+    breaks: WorkingHourBreakSchema.array(),
 });
 
 export type WorkingHourDto = z.infer<typeof WorkingHourSchema>;
