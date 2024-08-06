@@ -154,7 +154,7 @@ export default class DclApi {
     }
 
     public async getProductScheduleSlots(slug: string): Promise<ScheduleSlotDto[]> {
-        const res = await this.get(`${this.base_url}/schedule-slots/${slug}/`);
+        const res = await this.get(`${this.base_url}/products/schedule-slots/${slug}/`);
         return ScheduleSlotSchema.array().parseAsync(res);
     }
 
