@@ -209,7 +209,7 @@ export const ScheduleSlotSchema = z.object({
     capacity: z.coerce.number().nullable(),
     capacityBooked: z.coerce.number().nullable(),
     capacityAvailable: z.coerce.number().nullable(),
-    soldOut: z.coerce.number().nullable(),
+    soldOut: z.coerce.boolean().nullable(),
 });
 
 export type ScheduleSlotDto = z.infer<typeof ScheduleSlotSchema>;
