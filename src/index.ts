@@ -80,7 +80,8 @@ import {
     SaleSchemas,
     ImageTypes,
     AccessTypes,
-    ScheduleSlotTariffsStatuses
+    ScheduleSlotTariffsStatuses,
+    SoonFilter,
 } from './dtos/products.js';
 
 export {
@@ -88,4 +89,5 @@ export {
     ImageTypes,
     AccessTypes,
     ScheduleSlotTariffsStatuses,
+    SoonFilter,
 };

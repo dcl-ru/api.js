@@ -9,6 +9,7 @@ export enum SaleSchemas {
     ExternalRegistration = 5,
     Onsite = 6,
 }
+
 export const SaleSchemasEnumSchema = z.nativeEnum(SaleSchemas);
 
 export enum ImageTypes {
@@ -19,6 +20,7 @@ export enum ImageTypes {
     Regular = 5,
     Background = 6,
 }
+
 export const ImageTypesEnumSchema = z.nativeEnum(ImageTypes);
 
 export enum AccessTypes {
@@ -26,6 +28,7 @@ export enum AccessTypes {
     Paid = 2,
     Registration = 3,
 }
+
 export const AccessTypesEnumSchema = z.nativeEnum(AccessTypes);
 
 export enum ScheduleSlotTariffsStatuses {
@@ -33,7 +36,16 @@ export enum ScheduleSlotTariffsStatuses {
     Active = 2,
     SoldOut = 3,
 }
+
 export const ScheduleSlotTariffsStatusesEnumSchema = z.nativeEnum(ScheduleSlotTariffsStatuses);
+
+export enum SoonFilter {
+    Today = 'Сегодня',
+    Tomorrow = 'Завтра',
+    Weekend = 'Выходные'
+}
+
+export const SoonFilterEnumSchema = z.nativeEnum(SoonFilter);
 
 export const PeriodSchema = z.object({
     from: z.coerce.date().nullable(),
