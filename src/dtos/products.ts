@@ -234,8 +234,8 @@ export const TariffSchema = z.object({
     lifetimeWindowAfterFirstEnter: PeriodSchema.nullable(),
     exitEnterAllowed: z.coerce.boolean(),
     ticketGrouping: z.coerce.boolean(),
-    limitPerPerson: z.coerce.number(),
-    quotaAvailable: z.coerce.number(),
+    limitPerPerson: z.coerce.number().nullable(),
+    quotaAvailable: z.coerce.number().nullable(),
     soldOut: z.coerce.boolean(),
 });
 export type TariffDto = z.infer<typeof TariffSchema>;
@@ -249,8 +249,8 @@ export const TariffGroupSchema = z.object({
 export type TariffGroupDto = z.infer<typeof TariffGroupSchema>;
 
 export const ScheduleSlotTariffsSchema = z.object({
-    productTariffsStatus: ScheduleSlotTariffsStatusesEnumSchema,
+    status: ScheduleSlotTariffsStatusesEnumSchema,
     startOn: z.coerce.date().nullable(),
-    tariffGroups: TariffGroupSchema.array(),
+    groups: TariffGroupSchema.array(),
 });
 export type ScheduleSlotTariffsDto = z.infer<typeof ScheduleSlotTariffsSchema>;
