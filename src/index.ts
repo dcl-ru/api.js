@@ -12,14 +12,16 @@ import {
     TagSchema
 } from './dtos/fronts.js';
 import {
-    ProductCardDto,
-    ProductCardOnHomepageDto,
-    ProductCardOnHomepageSchema,
+    type ProductCardDto,
     ProductCardSchema,
-    ProductDto,
+    type ProductCardOnHomepageDto,
+    ProductCardOnHomepageSchema,
+    type ProductDto,
     ProductSchema,
-    ScheduleSlotDto,
-    ScheduleSlotSchema, ScheduleSlotTariffsDto, ScheduleSlotTariffsSchema,
+    type ScheduleSlotDto,
+    ScheduleSlotSchema,
+    type ScheduleSlotTariffsDto,
+    ScheduleSlotTariffsSchema,
 } from './dtos/products.js';
 import {APIErrorSchema} from './dtos/errors.js';
 import APIError from './error.js';
