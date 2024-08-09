@@ -13,37 +13,61 @@ import APIError from './error.js';
 export {APIError};
 
 
-import {
-    type CategoryDto,
-    type GroupDto,
-    type TagDto,
-    type BadgeDto,
-    type CategoriesGroupsTagsBadgesDto,
+import type {
+    CategoryDto,
+    GroupDto,
+    TagDto,
+    BadgeDto,
+    CategoriesGroupsTagsBadgesDto,
 } from './dtos/fronts.js';
 
-export {
-    type CategoryDto,
-    type GroupDto,
-    type TagDto,
-    type BadgeDto,
-    type CategoriesGroupsTagsBadgesDto,
+export type {
+    CategoryDto,
+    GroupDto,
+    TagDto,
+    BadgeDto,
+    CategoriesGroupsTagsBadgesDto,
 };
 
 
-import {
+import type {
+    PeriodDto,
+    PeriodTimeDto,
+    ImageDto,
+    GeoDto,
+    WorkingHourBreakDto,
+    WorkingHourDto,
+    OpenPeriodExclusionDto,
+    OpenPeriodDto,
+    InventoryItemDto,
+    InventoryItemFirstDto,
     ProductCardDto,
     ProductCardOnHomepageDto,
     ProductDto,
     ScheduleSlotDto,
+    TariffDto,
+    TariffGroupDto,
     ScheduleSlotTariffsDto,
 } from './dtos/products.js';
 
-export {
-    type ProductCardDto,
-    type ProductCardOnHomepageDto,
-    type ProductDto,
-    type ScheduleSlotDto,
-    type ScheduleSlotTariffsDto,
+export type {
+    PeriodDto,
+    PeriodTimeDto,
+    ImageDto,
+    GeoDto,
+    WorkingHourBreakDto,
+    WorkingHourDto,
+    OpenPeriodExclusionDto,
+    OpenPeriodDto,
+    InventoryItemDto,
+    InventoryItemFirstDto,
+    ProductCardDto,
+    ProductCardOnHomepageDto,
+    ProductDto,
+    ScheduleSlotDto,
+    TariffDto,
+    TariffGroupDto,
+    ScheduleSlotTariffsDto,
 };
 
 
