@@ -1,6 +1,6 @@
 export default class UnixTimestamp {
-    unixTimestamp: number = 0;
-    dateTime: Date = new Date();
+    private readonly unixTimestamp: number;
+    private readonly dateTime: Date;
 
     constructor(dt: number | string | Date) {
         switch (typeof dt) {

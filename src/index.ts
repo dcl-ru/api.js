@@ -159,7 +159,7 @@ export default class DclApi {
     }
 
     public async getProductScheduleSlotTariffs(slug: string, scheduleId: number, slotFrom: UnixTimestamp, slotUntil: UnixTimestamp): Promise<ScheduleSlotTariffsDto> {
-        const res = await this.get(`${this.base_url}/products/tariffs/${slug}/${scheduleId}/${slotFrom}/${slotUntil}/`);
+        const res = await this.get(`${this.base_url}/products/tariffs/${slug}/${scheduleId}/${slotFrom.toUnixTimestamp()}/${slotUntil.toUnixTimestamp()}/`);
         return ScheduleSlotTariffsSchema.parseAsync(res);
     }
 
