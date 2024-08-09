@@ -19,7 +19,7 @@ import {
     ProductDto,
     ProductSchema,
     ScheduleSlotDto,
-    ScheduleSlotSchema,
+    ScheduleSlotSchema, ScheduleSlotTariffsDto, ScheduleSlotTariffsSchema,
 } from './dtos/products.js';
 import {APIErrorSchema} from './dtos/errors.js';
 import APIError from './error.js';
@@ -156,6 +156,11 @@ export default class DclApi {
     public async getProductScheduleSlots(slug: string): Promise<ScheduleSlotDto[]> {
         const res = await this.get(`${this.base_url}/products/schedule-slots/${slug}/`);
         return ScheduleSlotSchema.array().parseAsync(res);
+    }
+
+    public async getProductScheduleSlotTariffs(slug: string, scheduleId: number, slotFrom: UnixTimestamp, slotUntil: UnixTimestamp): Promise<ScheduleSlotTariffsDto> {
+        const res = await this.get(`${this.base_url}/products/tariffs/${slug}/${scheduleId}/${slotFrom}/${slotUntil}/`);
+        return ScheduleSlotTariffsSchema.parseAsync(res);
     }
 
     public async getProductCardsOnHomepage(): Promise<ProductCardOnHomepageDto[]> {

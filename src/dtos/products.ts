@@ -28,6 +28,13 @@ export enum AccessTypes {
 }
 export const AccessTypesEnumSchema = z.nativeEnum(AccessTypes);
 
+export enum ScheduleSlotTariffsStatuses {
+    AwaitingStart = 1,
+    Active = 2,
+    SoldOut = 3,
+}
+export const ScheduleSlotTariffsStatusesEnumSchema = z.nativeEnum(ScheduleSlotTariffsStatuses);
+
 export const PeriodSchema = z.object({
     from: z.coerce.date().nullable(),
     until: z.coerce.date().nullable(),
@@ -207,10 +214,43 @@ export type ProductCardOnHomepageDto = z.infer<typeof ProductCardOnHomepageSchem
 export const ScheduleSlotSchema = z.object({
     id: z.coerce.number(),
     slot: PeriodSchema,
-    capacity: z.coerce.number().nullable(),
-    capacityBooked: z.coerce.number().nullable(),
     capacityAvailable: z.coerce.number().nullable(),
     soldOut: z.coerce.boolean().nullable(),
 });
 
 export type ScheduleSlotDto = z.infer<typeof ScheduleSlotSchema>;
+
+export const TariffSchema = z.object({
+    id: z.coerce.number(),
+    name: z.string(),
+    nameShort: z.string(),
+    nameFiscal: z.string(),
+    description: z.string().nullable(),
+    price: z.coerce.number(),
+    vatName: z.string().nullable(),
+    vatValue: z.coerce.number().nullable(),
+    multiplier: z.coerce.number(),
+    firstEnterWindow: PeriodSchema.nullable(),
+    lifetimeWindowAfterFirstEnter: PeriodSchema.nullable(),
+    exitEnterAllowed: z.coerce.boolean(),
+    ticketGrouping: z.coerce.boolean(),
+    limitPerPerson: z.coerce.number(),
+    quotaAvailable: z.coerce.number(),
+    soldOut: z.coerce.boolean(),
+});
+export type TariffDto = z.infer<typeof TariffSchema>;
+
+export const TariffGroupSchema = z.object({
+    id: z.coerce.number(),
+    name: z.string(),
+    slug: z.string(),
+    tariffs: TariffSchema.array(),
+});
+export type TariffGroupDto = z.infer<typeof TariffGroupSchema>;
+
+export const ScheduleSlotTariffsSchema = z.object({
+    productTariffsStatus: ScheduleSlotTariffsStatusesEnumSchema,
+    startOn: z.coerce.date().nullable(),
+    tariffGroups: TariffGroupSchema.array(),
+});
+export type ScheduleSlotTariffsDto = z.infer<typeof ScheduleSlotTariffsSchema>;
