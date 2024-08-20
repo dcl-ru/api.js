@@ -29,7 +29,7 @@ import {
     type PostCardDto,
     PostCardSchema,
     type PostDto,
-    PostSchema,
+    PostSchema, ProductCardPassedDto, ProductCardPassedSchema,
 } from '@dcl.ru/dtos';
 
 const VERSION: string = '3';
@@ -198,6 +198,11 @@ export default class DclApiClient {
     public async getProductCardsOnDate(timestamp: UnixTimestamp): Promise<ProductCardDto[]> {
         const res = await this.get(`${this.base_url}/products/cards/on/${timestamp.toUnixTimestamp()}/`);
         return ProductCardSchema.array().parseAsync(res);
+    }
+
+    public async getProductCardsPassed(): Promise<ProductCardPassedDto[]> {
+        const res = await this.get(`${this.base_url}/products/cards/passed/`);
+        return ProductCardPassedSchema.array().parseAsync(res);
     }
 
     public async getBlogPostCards(): Promise<PostCardDto[]> {
