@@ -110,7 +110,7 @@ export default class DclApiClient {
             return res.json();
         } else {
             const ae = await APIErrorSchema.parseAsync(await res.json());
-            throw new APIError(ae);
+            throw new APIError(ae, res.status);
         }
     }
 
@@ -121,7 +121,7 @@ export default class DclApiClient {
             return res.json();
         } else {
             const ae = await APIErrorSchema.parseAsync(await res.json());
-            throw new APIError(ae);
+            throw new APIError(ae, res.status);
         }
     }
 
