@@ -25,6 +25,10 @@ import {
     ScheduleSlotSchema,
     type ScheduleSlotTariffsDto,
     ScheduleSlotTariffsSchema,
+    type PromocodeDto,
+    PromocodeSchema,
+    type ExemptionDto,
+    ExemptionSchema,
 
     type PostCardDto,
     PostCardSchema,
@@ -205,14 +209,14 @@ export default class DclApiClient {
         return ProductCardPassedSchema.array().parseAsync(res);
     }
 
-    public async getProductPromocodeTariffs(slug: string, promocode: string): Promise<ProductCardPassedDto[]> {
+    public async getProductPromocodeTariffs(slug: string, promocode: string): Promise<PromocodeDto> {
         const res = await this.get(`${this.base_url}/products/promocodes/${slug}/${promocode}/`);
-        return ProductCardPassedSchema.array().parseAsync(res);
+        return PromocodeSchema.parseAsync(res);
     }
 
-    public async getProductExemptionTariffs(slug: string, exemption: string): Promise<ProductCardPassedDto[]> {
+    public async getProductExemptionTariffs(slug: string, exemption: string): Promise<ExemptionDto> {
         const res = await this.get(`${this.base_url}/products/exemptions/${slug}/${exemption}/`);
-        return ProductCardPassedSchema.array().parseAsync(res);
+        return ExemptionSchema.parseAsync(res);
     }
 
     public async getBlogPostCards(): Promise<PostCardDto[]> {
