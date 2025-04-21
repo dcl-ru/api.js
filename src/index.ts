@@ -205,6 +205,16 @@ export default class DclApiClient {
         return ProductCardPassedSchema.array().parseAsync(res);
     }
 
+    public async getProductPromocodeTariffs(slug: string, promocode: string): Promise<ProductCardPassedDto[]> {
+        const res = await this.get(`${this.base_url}/products/promocodes/${slug}/${promocode}/`);
+        return ProductCardPassedSchema.array().parseAsync(res);
+    }
+
+    public async getProductExemptionTariffs(slug: string, exemption: string): Promise<ProductCardPassedDto[]> {
+        const res = await this.get(`${this.base_url}/products/exemptions/${slug}/${exemption}/`);
+        return ProductCardPassedSchema.array().parseAsync(res);
+    }
+
     public async getBlogPostCards(): Promise<PostCardDto[]> {
         const res = await this.get(`${this.base_url}/blog/`);
         return PostCardSchema.array().parseAsync(res);
