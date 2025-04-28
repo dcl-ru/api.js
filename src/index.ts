@@ -27,13 +27,14 @@ import {
     ScheduleSlotTariffsSchema,
     type PromocodeDto,
     PromocodeSchema,
-    type ExemptionDto,
-    ExemptionSchema,
-
     type PostCardDto,
     PostCardSchema,
     type PostDto,
-    PostSchema, ProductCardPassedDto, ProductCardPassedSchema,
+    PostSchema,
+    type ProductCardPassedDto,
+    ProductCardPassedSchema,
+    type KzhnoDto,
+    KzhnoSchema,
 } from '@dcl.ru/dtos';
 
 const VERSION: string = '3';
@@ -118,6 +119,17 @@ export default class DclApiClient {
         }
     }
 
+    private async post(url: string, body: BodyInit): Promise<any> {
+        const req = this.prepareRequest('POST', url, body);
+        const res = await fetch(req);
+        if (res.ok) {
+            return res.json();
+        } else {
+            const ae = await APIErrorSchema.parseAsync(await res.json());
+            throw new APIError(ae, res.status);
+        }
+    }
+
     private async create(fetch: any, url: string, body: any): Promise<any> {
         const req = this.prepareRequest('POST', url, JSON.stringify(body));
         const res = await fetch(req);
@@ -174,6 +186,14 @@ export default class DclApiClient {
         return ScheduleSlotTariffsSchema.parseAsync(res);
     }
 
+    public async getProductScheduleSlotExemptionsTariffs(slug: string, scheduleId: number, slotFrom: UnixTimestamp, slotUntil: UnixTimestamp, exemptions: string[]): Promise<ScheduleSlotTariffsDto> {
+        const body = {
+            exemptions: exemptions
+        };
+        const res = await this.post(`${this.base_url}/products/tariffs/${slug}/${scheduleId}/${slotFrom.toUnixTimestamp()}/${slotUntil.toUnixTimestamp()}/`, JSON.stringify(body));
+        return ScheduleSlotTariffsSchema.parseAsync(res);
+    }
+
     public async getProductCardsOnHomepage(): Promise<ProductCardOnHomepageDto[]> {
         const res = await this.get(`${this.base_url}/products/cards/`);
         return ProductCardOnHomepageSchema.array().parseAsync(res);
@@ -214,11 +234,6 @@ export default class DclApiClient {
         return PromocodeSchema.parseAsync(res);
     }
 
-    public async getProductExemptionTariffs(slug: string, exemption: string): Promise<ExemptionDto> {
-        const res = await this.get(`${this.base_url}/products/exemptions/${slug}/${exemption}/`);
-        return ExemptionSchema.parseAsync(res);
-    }
-
     public async getBlogPostCards(): Promise<PostCardDto[]> {
         const res = await this.get(`${this.base_url}/blog/`);
         return PostCardSchema.array().parseAsync(res);
@@ -253,5 +268,10 @@ export default class DclApiClient {
     public async getBlogPost(slug: string): Promise<PostDto> {
         const res = await this.get(`${this.base_url}/blog/posts/${slug}/`);
         return PostSchema.parseAsync(res);
+    }
+
+    public async getKzhno(cardNumber: string): Promise<KzhnoDto> {
+        const res = await this.get(`${this.base_url}/kzhno/${cardNumber}/`);
+        return KzhnoSchema.parseAsync(res);
     }
 }
