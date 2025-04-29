@@ -77,6 +77,9 @@ export default class DclApiClient {
         const hashedPayload: string = hasher.digest('hex');
 
         const canonicalRequest: string = `${request.method.trim()}\n${canonicalUri}\n${canonicalQueryString}\n${canonicalHeaders}\n${signedHeaders}\n${hashedPayload}`;
+
+        console.log(canonicalRequest);
+
         return createHmac('sha256', this.secret)
             .update(new TextEncoder().encode(canonicalRequest))
             .digest('hex');
