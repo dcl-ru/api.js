@@ -52,9 +52,7 @@ export default class DclApiClient {
         this.secret = secret;
     }
 
-    private async signRequest(url: string, reqInit: RequestInit): Promise<string> {
-        const request = new Request(url, reqInit);
-
+    private async signRequest(request: Request): Promise<string> {
         const u = new URL(request.url);
         u.searchParams.sort();
         const canonicalUri: string = u.pathname.trim();
@@ -114,7 +112,8 @@ export default class DclApiClient {
                 .slice(0, -1)
                 .trim()
         );
-        const signature = await this.signRequest(url, reqInit);
+
+        const signature = await this.signRequest(req.clone());
         req.headers.set('X-API-Signature', signature);
 
         return req;
