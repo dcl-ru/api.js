@@ -52,7 +52,7 @@ export default class DclApiClient {
         this.secret = secret;
     }
 
-    private signRequest(request: Request): string {
+    private async signRequest(request: Request): Promise<string> {
         const u = new URL(request.url);
         u.searchParams.sort();
         const canonicalUri: string = u.pathname.trim();
@@ -65,17 +65,24 @@ export default class DclApiClient {
             .sort()
             .reduce((acc, obj) => acc += `${obj.toLowerCase().trim()};`, '').slice(0, -1)
             .trim();
-        const payload: string = request.body ? JSON.stringify(request.body) : '';
-        const hashedPayload: string = createHash('sha256')
-            .update(new TextEncoder().encode(payload))
-            .digest('hex');
+
+        const hasher = createHash('sha256');
+        if (request.body !== null) {
+            for await (const chunk of request.body) {
+                hasher.update(chunk);
+            }
+        } else {
+            hasher.update('');
+        }
+        const hashedPayload: string = hasher.digest('hex');
+
         const canonicalRequest: string = `${request.method.trim()}\n${canonicalUri}\n${canonicalQueryString}\n${canonicalHeaders}\n${signedHeaders}\n${hashedPayload}`;
         return createHmac('sha256', this.secret)
             .update(new TextEncoder().encode(canonicalRequest))
             .digest('hex');
     }
 
-    private prepareRequest(method: 'GET' | 'HEAD' | 'POST' | 'PUT' | 'PATCH' | 'DELETE', url: string, body: BodyInit | null): Request {
+    private async prepareRequest(method: 'GET' | 'HEAD' | 'POST' | 'PUT' | 'PATCH' | 'DELETE', url: string, body: BodyInit | null): Promise<Request> {
         const headersInit: HeadersInit = {
             'Accept': 'application/json; charset=UTF-8',
             'X-Front': this.front,
@@ -102,14 +109,14 @@ export default class DclApiClient {
                 .slice(0, -1)
                 .trim()
         );
-        const signature = this.signRequest(req);
+        const signature = await this.signRequest(req);
         req.headers.set('X-API-Signature', signature);
 
         return req;
     }
 
     private async get(url: string): Promise<any> {
-        const req = this.prepareRequest('GET', url, null);
+        const req = await this.prepareRequest('GET', url, null);
         const res = await fetch(req);
         if (res.ok) {
             return res.json();
@@ -120,7 +127,7 @@ export default class DclApiClient {
     }
 
     private async post(url: string, body: BodyInit): Promise<any> {
-        const req = this.prepareRequest('POST', url, body);
+        const req = await this.prepareRequest('POST', url, body);
         const res = await fetch(req);
         if (res.ok) {
             return res.json();
