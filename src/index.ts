@@ -186,9 +186,9 @@ export default class DclApiClient {
         return ScheduleSlotTariffsSchema.parseAsync(res);
     }
 
-    public async getProductScheduleSlotBenefitsTariffs(slug: string, scheduleId: number, slotFrom: UnixTimestamp, slotUntil: UnixTimestamp, exemptions: string[]): Promise<ScheduleSlotTariffsDto> {
+    public async getProductScheduleSlotBenefitsTariffs(slug: string, scheduleId: number, slotFrom: UnixTimestamp, slotUntil: UnixTimestamp, benefits: string[]): Promise<ScheduleSlotTariffsDto> {
         const body = {
-            exemptions: exemptions
+            benefits: benefits
         };
         const res = await this.post(`${this.base_url}/products/tariffs/${slug}/${scheduleId}/${slotFrom.toUnixTimestamp()}/${slotUntil.toUnixTimestamp()}/`, JSON.stringify(body));
         return ScheduleSlotTariffsSchema.parseAsync(res);
