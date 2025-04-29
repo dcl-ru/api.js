@@ -53,22 +53,24 @@ export default class DclApiClient {
     }
 
     private async signRequest(request: Request): Promise<string> {
-        const u = new URL(request.url);
+        const req = request.clone();
+
+        const u = new URL(req.url);
         u.searchParams.sort();
         const canonicalUri: string = u.pathname.trim();
         const canonicalQueryString: string = u.searchParams.toString().trim();
-        const canonicalHeaders: string = [...request.headers.keys()]
+        const canonicalHeaders: string = [...req.headers.keys()]
             .sort()
-            .reduce((acc, obj) => acc += `${obj.toLowerCase().trim()}:${request.headers.get(obj)?.toLowerCase().trim().replace(/\s\s+/g, ' ')}\n`, '')
+            .reduce((acc, obj) => acc += `${obj.toLowerCase().trim()}:${req.headers.get(obj)?.toLowerCase().trim().replace(/\s\s+/g, ' ')}\n`, '')
             .trim();
-        const signedHeaders: string = [...request.headers.keys()]
+        const signedHeaders: string = [...req.headers.keys()]
             .sort()
             .reduce((acc, obj) => acc += `${obj.toLowerCase().trim()};`, '').slice(0, -1)
             .trim();
 
         const hasher = createHash('sha256');
-        if (request.body !== null) {
-            for await (const chunk of request.body) {
+        if (req.body !== null) {
+            for await (const chunk of req.body) {
                 hasher.update(chunk);
             }
         } else {
@@ -76,7 +78,7 @@ export default class DclApiClient {
         }
         const hashedPayload: string = hasher.digest('hex');
 
-        const canonicalRequest: string = `${request.method.trim()}\n${canonicalUri}\n${canonicalQueryString}\n${canonicalHeaders}\n${signedHeaders}\n${hashedPayload}`;
+        const canonicalRequest: string = `${req.method.trim()}\n${canonicalUri}\n${canonicalQueryString}\n${canonicalHeaders}\n${signedHeaders}\n${hashedPayload}`;
 
         console.log(canonicalRequest);
 
